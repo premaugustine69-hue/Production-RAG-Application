@@ -1,0 +1,2 @@
+"""Deprecated Openai compatibility endpoint."""
+

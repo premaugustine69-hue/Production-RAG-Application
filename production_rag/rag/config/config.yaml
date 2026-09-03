@@ -1,0 +1,18 @@
+# Production RAG Configuration
+rag:
+  llm_model: "llama3"              # Ollama model name
+  top_k: 5                         # Number of documents to retrieve
+  bm25_weight: 0.5                  # Weight for BM25 score in hybrid retrieval
+  vector_weight: 0.5                # Weight for vector similarity in hybrid retrieval
+  reranker_enabled: true            # Whether to apply cross-encoder reranking
+  reranker_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  reranker_top_n: 3                # Number of docs to return after reranking
+  
+evaluation:
+  test_dataset: "rag/evaluation/test_dataset.json"
+  score_threshold: 0.7              # Minimum threshold for CI/CD failure
+  metrics:
+    - faithfulness
+    - answer_relevance
+    - context_precision
+
