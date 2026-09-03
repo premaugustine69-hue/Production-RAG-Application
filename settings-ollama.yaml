@@ -1,0 +1,42 @@
+server:
+  env_name: ${APP_ENV:ollama}
+
+llm:
+  mode: ollama
+  max_new_tokens: 256              # 🔧 smaller to fit memory comfortably
+  context_window: 1024             # 🔧 keep small on low-RAM machines
+  temperature: 0.1
+
+embedding:
+  mode: ollama
+
+ollama:
+  llm_model: llama3.2:3b-instruct-q4_K_M   # 🔧 smaller model (pull it with: ollama pull llama3.2:3b-instruct-q4_K_M)
+  embedding_model: nomic-embed-text
+  api_base: http://127.0.0.1:11434         # 🔧 127.0.0.1 avoids localhost/IPv6 quirks
+  embedding_api_base: http://127.0.0.1:11434
+  keep_alive: 5m
+  tfs_z: 1.0
+  top_k: 40
+  top_p: 0.9
+  repeat_last_n: 64
+  repeat_penalty: 1.2
+  request_timeout: 300.0                   # 🔧 give more time
+
+# 🔧 retrieve fewer chunks so it doesn't drag in CERTIFICATIONS
+retriever:
+  similarity_top_k: 1                      # try 1; if it misses, try 2
+  # If your version doesn't recognize similarity_top_k, use:
+  # top_k: 1
+
+# 🔧 smaller chunks reduce chance two headings live in one chunk
+ingest:
+  chunk_size: 600
+  chunk_overlap: 80
+
+vectorstore:
+  database: qdrant
+
+qdrant:
+  path: local_data/production_rag/qdrant
+

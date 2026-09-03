@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enterprise-api
+  labels:
+    app: enterprise-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: enterprise-api
+  template:
+    metadata:
+      labels:
+        app: enterprise-api
+    spec:
+      containers:
+        - name: enterprise-api
+          image: "{{ .Values.enterpriseApi.image.repository }}:{{ .Values.enterpriseApi.image.tag }}"
+          imagePullPolicy: {{ .Values.enterpriseApi.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://{{ .Values.postgres.host }}:{{ .Values.postgres.port }}/{{ .Values.postgres.database }}"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: {{ .Values.postgres.user | quote }}
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{ .Values.postgres.password | quote }}
+            - name: SPRING_DATA_REDIS_HOST
+              value: {{ .Values.redis.host | quote }}
+            - name: SPRING_DATA_REDIS_PORT
+              value: {{ .Values.redis.port | quote }}
+            - name: FASTAPI_URL
+              value: "http://fastapi-ai:8001"
+          resources:
+            {{- toYaml .Values.enterpriseApi.resources | nindent 12 }}

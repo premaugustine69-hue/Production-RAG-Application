@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-ai
+spec:
+  selector:
+    app: fastapi-ai
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: enterprise-api
+spec:
+  selector:
+    app: enterprise-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP

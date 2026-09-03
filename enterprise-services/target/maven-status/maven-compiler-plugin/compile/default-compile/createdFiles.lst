@@ -1,0 +1,12 @@
+com\zylon\enterprise\client\FastApiClient.class
+com\zylon\enterprise\service\UserService.class
+com\zylon\enterprise\config\ObservabilityConfig.class
+com\zylon\enterprise\config\SecurityConfig.class
+com\zylon\enterprise\repository\UserRepository.class
+com\zylon\enterprise\service\AuthService.class
+com\zylon\enterprise\domain\Organization.class
+com\zylon\enterprise\service\AdminService.class
+com\zylon\enterprise\domain\User.class
+com\zylon\enterprise\service\NotificationService.class
+com\zylon\enterprise\repository\OrganizationRepository.class
+com\zylon\enterprise\EnterpriseApplication.class

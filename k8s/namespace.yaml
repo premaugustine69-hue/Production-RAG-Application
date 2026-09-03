@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: enterprise-rag
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: enterprise-rag
+data:
+  POSTGRES_HOST: "postgres-svc"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "rag_db"
+  REDIS_HOST: "redis-svc"
+  REDIS_PORT: "6379"
+  FASTAPI_URL: "http://fastapi-ai:8001"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4318"

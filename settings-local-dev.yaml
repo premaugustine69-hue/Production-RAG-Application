@@ -1,0 +1,48 @@
+# Local dev overrides — no Ollama, no external LLM required
+# Switch LLM and embeddings to mock/local-only modes
+
+llm:
+  mode: mock          # Uses LlamaIndex MockLLM — no Ollama needed
+
+embedding:
+  mode: huggingface   # Local CPU embeddings
+  ingest_mode: simple
+  embed_dim: 384
+
+huggingface:
+  embedding_hf_model_name: BAAI/bge-small-en-v1.5
+  access_token: ""
+  trust_remote_code: false
+
+server:
+  env_name: local
+  port: 8001
+  auth:
+    enabled: false    # Disable JWT auth so startup doesn't need DB
+    secret: "local-dev-secret"
+    jwt_enabled: false
+    access_token_expire_minutes: 60
+    refresh_token_expire_days: 30
+
+vectorstore:
+  database: qdrant
+
+nodestore:
+  database: simple
+
+qdrant:
+  path: local_data/production_rag/qdrant
+
+# Disable postgres / redis hard-failures at startup
+postgres:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: password
+  database: rag_db
+
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  password: ""

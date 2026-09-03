@@ -1,0 +1,61 @@
+replicaCount: 2
+
+fastapi:
+  image:
+    repository: myregistry/fastapi-ai
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8001
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+
+enterpriseApi:
+  image:
+    repository: myregistry/enterprise-api
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+
+postgres:
+  host: "postgres-svc"
+  port: 5432
+  user: "postgres"
+  password: "password"
+  database: "rag_db"
+
+redis:
+  host: "redis-svc"
+  port: 6379
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: api.enterprise-rag.com
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            serviceName: enterprise-api
+            servicePort: 8080
+        - path: /v1
+          pathType: Prefix
+          backend:
+            serviceName: fastapi-ai
+            servicePort: 8001

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-ai
+  labels:
+    app: fastapi-ai
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: fastapi-ai
+  template:
+    metadata:
+      labels:
+        app: fastapi-ai
+    spec:
+      containers:
+        - name: fastapi-ai
+          image: "{{ .Values.fastapi.image.repository }}:{{ .Values.fastapi.image.tag }}"
+          imagePullPolicy: {{ .Values.fastapi.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8001
+              protocol: TCP
+          env:
+            - name: POSTGRES_HOST
+              value: {{ .Values.postgres.host | quote }}
+            - name: REDIS_HOST
+              value: {{ .Values.redis.host | quote }}
+          resources:
+            {{- toYaml .Values.fastapi.resources | nindent 12 }}

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: enterprise-rag-ingress
+  namespace: enterprise-rag
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.enterprise-rag.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: enterprise-api
+                port:
+                  number: 8080
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: fastapi-ai
+                port:
+                  number: 8001

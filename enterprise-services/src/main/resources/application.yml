@@ -1,0 +1,65 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: enterprise-services
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rag_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate # Database schema is managed by Alembic in Python
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+fastapi:
+  url: http://localhost:8001
+
+jwt:
+  secret: "change-me-in-production-long-secure-key-string"
+  expiration: 900000 # 15 minutes in ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics,info
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} [%thread] [traceId=%X{traceId}] [correlationId=%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+spring:
+  application:
+    name: enterprise-services
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rag_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+      host: localhost
+      port: 6379

@@ -1,0 +1,12 @@
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\EnterpriseApplication.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\client\FastApiClient.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\config\ObservabilityConfig.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\repository\OrganizationRepository.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\repository\UserRepository.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\domain\User.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\service\UserService.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\service\AdminService.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\domain\Organization.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\service\AuthService.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\config\SecurityConfig.java
+D:\AI\production-rag\enterprise-services\src\main\java\com\zylon\enterprise\service\NotificationService.java

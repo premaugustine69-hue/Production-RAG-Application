@@ -1,0 +1,40 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  json:
+    (): production_rag.observability.json_formatter.JSONFormatter
+
+  simple:
+    format: "%(asctime)s %(levelname)-8s %(name)s - %(message)s"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: json
+    stream: ext://sys.stdout
+
+  cloudwatch:
+    class: logging.StreamHandler
+    formatter: json
+    stream: ext://sys.stdout  # Stdout is captured by CloudWatch Logs agent in production
+
+root:
+  level: INFO
+  handlers: [console]
+
+loggers:
+  uvicorn:
+    level: INFO
+    handlers: [console]
+    propagate: false
+
+  uvicorn.access:
+    level: INFO
+    handlers: [console]
+    propagate: false
+
+  production_rag:
+    level: INFO
+    handlers: [console]
+    propagate: false
